@@ -43,7 +43,7 @@ class Momentum:
 
 
 def train(
-    model, optimizer, loss_fct=torch.nn.NLLLoss(), nb_epochs=5_000, batch_size=128
+    model, optimizer, loss_fct=torch.nn.NLLLoss(), nb_epochs=5000, batch_size=128
 ):
     testing_accuracy = []
     for epoch in tqdm(range(nb_epochs)):

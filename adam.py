@@ -45,7 +45,7 @@ class Adam:
             p.data = p.data - self.alpha*m / (v.sqrt() + self.epsilon)
 
 
-def train(model, optimizer, loss_fct=torch.nn.NLLLoss(), nb_epochs=5_000, batch_size=128):
+def train(model, optimizer, loss_fct=torch.nn.NLLLoss(), nb_epochs=5000, batch_size=128):
     testing_accuracy = []
     for epoch in tqdm(range(nb_epochs)):
 
