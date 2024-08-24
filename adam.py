@@ -1,3 +1,4 @@
+import os
 import torch
 import torch.nn as nn
 import numpy as np
@@ -74,8 +75,8 @@ def train(model, optimizer, loss_fct=torch.nn.NLLLoss(), nb_epochs=5000, batch_s
 
 if __name__ == "__main__":
     device = "cuda" if torch.cuda.is_available() else "cpu"
-
-    labels = ["Pytorch Adam", "Custom Adam"]
+    os.makedirs('images', exist_ok=True)
+    labels = ["Pytorch_Adam", "Custom_Adam"]
     for i, optim in enumerate([torch.optim.Adam, Adam]):
         model = torch.nn.Sequential(nn.Dropout(p=0.4), nn.Linear(28*28, 1200),
                                     nn.Dropout(p=0.4), nn.Linear(1200, 10),
@@ -84,8 +85,10 @@ if __name__ == "__main__":
         optimizer = optim(model if i == 1 else model.parameters())
         testing_accuracy = train(model, optimizer)
         plt.plot(testing_accuracy, label=labels[i])
+        plt.legend()
+        plt.xlabel('Epochs (x100)')
+        plt.ylabel('Testing accuracy', fontsize=14)
+        plt.savefig(f'images/{labels[i]}.png')
         plt.show()
-        
-
 
 

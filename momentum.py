@@ -1,3 +1,4 @@
+import os
 import torch
 import torch.nn as nn
 import numpy as np
@@ -75,9 +76,9 @@ def train(
 
 if __name__ == "__main__":
     device = "cuda" if torch.cuda.is_available() else "cpu"
-
-    labels = ["PyTorch Momentum", "This implementation"]
-    for i, optim in enumerate([torch.optim.Adam, Momentum]):
+    os.makedirs('images', exist_ok=True)
+    labels = ["PyTorch_SGD", "SGD_with_Momentum"]
+    for i, optim in enumerate([torch.optim.SGD, Momentum]):
         model = torch.nn.Sequential(
             nn.Dropout(p=0.4),
             nn.Linear(28 * 28, 1200),
@@ -89,9 +90,8 @@ if __name__ == "__main__":
         optimizer = optim(model if i == 1 else model.parameters())
         testing_accuracy = train(model, optimizer)
         plt.plot(testing_accuracy, label=labels[i])
+        plt.legend()
+        plt.xlabel('Epochs (x100)')
+        plt.ylabel('Testing accuracy', fontsize=14)
+        plt.savefig(f'images/{labels[i]}.png')
         plt.show()
-
-    plt.legend()
-    plt.xlabel("Epochs (x100)")
-    plt.ylabel("Testing accuracy", fontsize=14)
-    # plt.savefig('adam.png', bbox_inches='tight', fontsize=14)
