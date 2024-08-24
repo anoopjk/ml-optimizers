@@ -5,7 +5,7 @@ Different type optimizers such as SGD, Momentum, RMSprop, Adam tested on MNIST d
 
 1. Download mnist data from https://github.com/golbin/TensorFlow-MNIST/tree/master/mnist/data
 2. place the 4 files inside "mnist" folder
-
+3. (Optional but recommended) create  conda environment and install the dependencies
 ```commandline
 $ pip3 install -r requirements.txt
 $ python3 adam.py
